@@ -1,0 +1,33 @@
+{
+  "name": "extension",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "cp -r src/ dist && parcel watch src/background.js src/popup.html src/options.html --public-url '.' --no-cache",
+    "build": "rm -r dist && rm dist.zip && parcel build src/background.js src/popup.html src/options.html --public-url '.' --no-source-maps && cp src/manifest.json dist/manifest.json && cp -r src/assets dist && zip -r dist.zip dist",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/FeedsPub/extension.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/FeedsPub/extension/issues"
+  },
+  "homepage": "https://github.com/FeedsPub/extension#readme",
+  "dependencies": {
+    "graphql": "^14.6.0",
+    "graphql-request": "^1.8.2",
+    "graphql-tag": "^2.10.3"
+  },
+  "browserslist": [
+    "since 2017-06"
+  ],
+  "devDependencies": {
+    "cssnano": "^4.1.10"
+  }
+}
