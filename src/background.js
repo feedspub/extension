@@ -32,3 +32,27 @@ chrome.alarms.onAlarm.addListener(async () => {
     localStorage.setItem('lastCheckTime', now);
   }
 });
+
+// update message	
+chrome.runtime.onInstalled.addListener(() => {	
+  chrome.notifications.create('noti_id_update', {	
+    type: 'basic',	
+    iconUrl: 'assets/icon.png',	
+    title: 'Feeds Pub updated',	
+    message: 'click to see update details',	
+    requireInteraction: true, // do not close until click	
+  });	
+});	
+
+// open new tab when click notification	
+chrome.notifications.onClicked.addListener((notificationId) => {	
+  if (notificationId === 'noti_id_update') {	
+    window.focus();	
+    chrome.tabs.create({ url: 'https://github.com/FeedsPub/extension/releases' });	
+    chrome.notifications.clear(notificationId);	
+  } else {	
+    // window.focus();	
+    // chrome.tabs.create({ url: chrome.extension.getURL('index.html#from_action') });	
+    chrome.notifications.clear(notificationId);	
+  }	
+});
