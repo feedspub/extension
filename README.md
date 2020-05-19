@@ -2,4 +2,5 @@
 
 ## Updates
 
-2020-04-29: Get unread count and display [[Release](https://github.com/FeedsPub/extension/releases/tag/v1.2)]
+2020-05-19: v1.4: Bug fix: user has to sign in again after quit chrome
+2020-04-29: v1.2: Get unread count and display

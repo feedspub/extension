@@ -24,12 +24,15 @@ chrome.alarms.create({ periodInMinutes: 1 });
 chrome.alarms.onAlarm.addListener(async () => {
   const lastCheckTime = Number(localStorage.getItem('lastCheckTime'));
   const now = new Date().getTime();
-  if (
-    now - new Date(lastCheckTime).getTime() > 1000 * 60 * 10
-    || !lastCheckTime
-  ) {
-    await getUnreadCount();
-    localStorage.setItem('lastCheckTime', now);
+  const token = localStorage.getItem('token');
+  if (token) {
+    if (
+      now - new Date(lastCheckTime).getTime() > 1000 * 60 * 10
+      || !lastCheckTime
+    ) {
+      await getUnreadCount();
+      localStorage.setItem('lastCheckTime', now);
+    }
   }
 });
 
@@ -48,7 +51,7 @@ chrome.runtime.onInstalled.addListener(() => {
 chrome.notifications.onClicked.addListener((notificationId) => {	
   if (notificationId === 'noti_id_update') {	
     window.focus();	
-    chrome.tabs.create({ url: 'https://github.com/FeedsPub/extension/releases' });	
+    chrome.tabs.create({ url: 'https://github.com/FeedsPub/extension#updates' });	
     chrome.notifications.clear(notificationId);	
   } else {	
     // window.focus();	
